@@ -28,12 +28,12 @@ public class Axe : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        axeRb = GetComponent<Rigidbody>();
+        axeRb = axe.GetComponent<Rigidbody>();
         axeRb.isKinematic = true;
         axeRb.useGravity = false;
     }
 
-    void FixedUpdate()
+    private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -44,10 +44,14 @@ public class Axe : MonoBehaviour
         {
             startPosition = axe.transform.position;
             endPosition = axePosHolder.transform.position;
-            startTime = Time.time; 
+            startTime = Time.time;
             journeyLength = Vector3.Distance(startPosition, endPosition);
             axeState = AxeState.Returning;
         }
+    }
+    void FixedUpdate()
+    {
+
 
         if (axeState == AxeState.Thrown)
         {
@@ -77,7 +81,7 @@ public class Axe : MonoBehaviour
 
     void RecallAxe()
     {
-        float distCovered = (Time.time - startTime) / axeFlightSpeed;
+        float distCovered = (Time.time - startTime) * axeFlightSpeed;
         float fracJourney = distCovered / journeyLength;
         
         axe.transform.position = Vector3.Lerp(startPosition, endPosition, fracJourney);
@@ -94,8 +98,7 @@ public class Axe : MonoBehaviour
 
         axeCollision.RemoveConstraints();
 
-        axe.transform.position = axePosHolder.transform.position;
-        axe.transform.rotation = axePosHolder.transform.rotation;
+        axe.transform.SetPositionAndRotation(axePosHolder.transform.position, axePosHolder.transform.rotation);
 
         axeRb.isKinematic = true;
         axeRb.useGravity = false;
