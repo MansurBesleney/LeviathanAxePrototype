@@ -22,12 +22,12 @@ public class AxeCollision : MonoBehaviour
         AddConstraints();
     }
 
-    private void AddConstraints()
+    public void AddConstraints()
     {
         rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
     }
 
-    private void RemoveConstraints()
+    public void RemoveConstraints()
     {
         rb.constraints = RigidbodyConstraints.None;
     }

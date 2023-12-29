@@ -1240,6 +1240,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
+  - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1338,6 +1339,26 @@ MonoBehaviour:
   sensX: 400
   sensY: 400
   orientation: {fileID: 286718423}
+--- !u!114 &963194230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3efe95642fa9b4a43a05eea7f139990f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axe: {fileID: 2923395488464990839}
+  axeRb: {fileID: 0}
+  axePosHolder: {fileID: 767131495}
+  axeFlightSpeed: 10
+  axeThrowPower: 10
+  axeRotationSpeed: 10
+  axeCollision: {fileID: 2923395488464990842}
+  axeState: 0
 --- !u!1001 &1088591639
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2750,6 +2771,7 @@ GameObject:
   - component: {fileID: 2923395488464563799}
   - component: {fileID: 2923395488464990841}
   - component: {fileID: 2923395488464990840}
+  - component: {fileID: 2923395488464990842}
   m_Layer: 0
   m_Name: axe
   m_TagString: Untagged
@@ -2805,6 +2827,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2923395488464990842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2923395488464990839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3db915b62af7af440935c88d2f919c37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  axe: {fileID: 963194230}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -46,6 +46,7 @@ public class Axe : MonoBehaviour
             endPosition = axePosHolder.transform.position;
             startTime = Time.time; 
             journeyLength = Vector3.Distance(startPosition, endPosition);
+            axeState = AxeState.Returning;
         }
 
         if (axeState == AxeState.Thrown)
@@ -57,5 +58,53 @@ public class Axe : MonoBehaviour
         {
             axe.transform.Rotate(6.0f * axeRotationSpeed * Time.deltaTime, 0, 0);
         }
+
+        if(axeState == AxeState.Returning)
+        {
+            RecallAxe();
+        }
+    }
+
+    void ThrownAxeWithPhysics()
+    {
+        axe.transform.parent = null;
+        axeState = AxeState.Traveling;
+        axeRb.isKinematic = false;
+        axeRb.useGravity = true;
+
+        axeRb.AddForce(axe.transform.forward * axeThrowPower);
+    }
+
+    void RecallAxe()
+    {
+        float distCovered = (Time.time - startTime) / axeFlightSpeed;
+        float fracJourney = distCovered / journeyLength;
+        
+        axe.transform.position = Vector3.Lerp(startPosition, endPosition, fracJourney);
+
+        if(fracJourney >= 1.0f)
+        {
+            RecalledAxe();
+        }
+    }
+
+    void RecalledAxe()
+    {
+        axeState = AxeState.Static;
+
+        axeCollision.RemoveConstraints();
+
+        axe.transform.position = axePosHolder.transform.position;
+        axe.transform.rotation = axePosHolder.transform.rotation;
+
+        axeRb.isKinematic = true;
+        axeRb.useGravity = false;
+
+        axe.transform.parent = this.transform;
+    }
+
+    public void CollisionOccured()
+    {
+        axeState = AxeState.Static;
     }
 }
